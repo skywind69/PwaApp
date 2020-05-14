@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 
 import { DataService } from './data.service';
 
@@ -12,16 +13,16 @@ export class AppComponent {
 
   // update: boolean = false;
   joke: any;
-  constructor(private data: DataService){}
+  // constructor(private data: DataService){}
 
-  // constructor(updates: SwUpdate, private data: DataService) {
-  //   updates.available.subscribe(event => {
+  constructor(updates: SwUpdate, private data: DataService) {
+    updates.available.subscribe(event => {
 
-  //     //this.update = true;
-  //     updates.activateUpdate().then(() => document.location.reload());
+      //this.update = true;
+      updates.activateUpdate().then(() => document.location.reload());
 
-  //   })
-  // }
+    })
+  }
 
   ngOnInit() {
     this.data.gimmeJokes().subscribe(res => {
